@@ -7,7 +7,6 @@ import base64
 import io
 import requests, time, os, json, re
 import pandas as pd
-import tempfile
 from gtts import gTTS
 from PIL import Image
 from io import BytesIO
@@ -70,7 +69,7 @@ def youtube_trancription(youtube_video):
 
 def query(prompt):
     HuggingFaceAPI = os.getenv("HUGGING_FACE_API")
-    API_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0"
+    API_URL = "https://api-inference.huggingface.co/models/Adrenex/fastgen"
     headers = {"Authorization": f"Bearer {HuggingFaceAPI}"}
     payload = {"inputs": prompt}
     response = requests.post(API_URL, headers=headers, json=payload)
