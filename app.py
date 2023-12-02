@@ -6,18 +6,15 @@ import matplotlib.pyplot as plt
 import base64
 import io
 import requests, time, os, json, re
-import json
 import pandas as pd
 import tempfile
 from gtts import gTTS
 from PIL import Image
-import requests
 from io import BytesIO
 from PyPDF2 import PdfReader
 import warnings
 warnings.filterwarnings('ignore')
 from youtube_transcript_api import YouTubeTranscriptApi
-import pandas as pd
 from deep_translator import GoogleTranslator
 import openai
 
