@@ -446,11 +446,17 @@ def result_text2speech():
     if request.method == 'POST':
         original_text = request.form['originalText']
         language = request.form['language']
+
+        # Generate the speech and save it to an in-memory file
         speech = gTTS(text=original_text, lang=language, slow=False, tld="com.au")
-        temp_audio_file = tempfile.NamedTemporaryFile(suffix=".mp3", delete=False)
-        speech.save(temp_audio_file.name)
-        audio_url = temp_audio_file.name
-        return render_template('result_text2speech.html', txt=original_text, l=language, url=audio_url)
+        audio_file = io.BytesIO()
+        speech.write_to_fp(audio_file)
+        audio_file.seek(0)
+
+        # Convert the BytesIO object to a base64-encoded string
+        audio_base64 = base64.b64encode(audio_file.read()).decode('utf-8')
+        return render_template('result_text2speech.html', txt=original_text, l=language, audio_base64=audio_base64)
+
     
 
 @app.route('/result_wordcloud', methods=['POST'])
